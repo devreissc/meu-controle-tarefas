@@ -19,10 +19,26 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </li>
-                <li class="nav-item">
-                    <x-nav-link :href="route('tarefas.index')" :active="request()->routeIs('tarefas.index')" class="nav-link">
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         {{ __('Tarefas') }}
-                    </x-nav-link>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <x-dropdown-link :href="route('tarefas.index')" class="dropdown-item">
+                                {{ __('Listar') }}
+                            </x-dropdown-link>
+                        </li>
+                        <li>
+                            <x-dropdown-link :href="route('tarefas.create')" class="dropdown-item">
+                                {{ __('Nova') }}
+                            </x-dropdown-link>
+                        </li>
+                    </ul>
                 </li>
             </ul>
 
