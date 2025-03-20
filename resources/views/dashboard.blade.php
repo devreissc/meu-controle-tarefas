@@ -1,16 +1,15 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+    <div class="container py-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h2 class="fw-semibold text-dark">
+                    {{ __('Dashboard') }}
+                </h2>
+            </div>
+            <div class="card-body">
+                <p class="text-dark">
                     {{ __("You're logged in!") }}
-                </div>
+                </p>
             </div>
         </div>
     </div>

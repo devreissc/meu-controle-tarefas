@@ -1,6 +1,13 @@
 <x-guest-layout>
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="p-4 bg-white shadow rounded" style="width: 100%; max-width: 400px;">
+    <div class="d-flex justify-content-between align-items-center min-vh-100" style=" background-image: url('{{ asset('assets/images/auth_background.jpg') }}'); background-size: cover; background-position: center; height: 100vh; width: 100%; padding: 128px;">
+        
+        <!-- Texto à esquerda -->
+        <div class="p-4 text-white">
+            <p>Apenas um novo teste</p>
+        </div>
+
+        <!-- Formulário à direita -->
+        <div class="p-4 bg-white shadow rounded" style="width: 100%; max-width: 400px; ">
             <h2 class="text-center mb-4">{{ __('Login') }}</h2>
 
             <!-- Session Status -->
