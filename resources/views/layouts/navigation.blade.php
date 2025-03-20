@@ -19,6 +19,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </li>
+                <li class="nav-item">
+                    <x-nav-link :href="route('tarefas.index')" :active="request()->routeIs('tarefas.index')" class="nav-link">
+                        {{ __('Tarefas') }}
+                    </x-nav-link>
+                </li>
             </ul>
 
             <!-- Dropdown de Configurações -->
@@ -31,7 +36,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <x-dropdown-link :href="route('profile.edit')" class="dropdown-item">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-dropdown-link>
                         </li>
                         <li>
@@ -39,7 +44,7 @@
                                 @csrf
                                 <x-dropdown-link :href="route('logout')" class="dropdown-item"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Sair') }}
                                 </x-dropdown-link>
                             </form>
                         </li>
