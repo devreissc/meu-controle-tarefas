@@ -6,7 +6,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TasksController extends Controller
+class TaskController extends Controller
 {
 
     public function index()
