@@ -46,4 +46,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Task::class)->orWhereNull('user_id')->orderBy('id', 'desc');;
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class)->orWhereNull('user_id')->orderBy('id', 'desc');;
+    }
 }

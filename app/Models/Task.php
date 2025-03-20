@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use SoftDeletes;
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'task_name',
@@ -19,4 +18,19 @@ class Task extends Model
         'completed_at',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function subtasks()
+    {
+        return $this->hasMany(Subtask::class);
+    }
 }
