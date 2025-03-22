@@ -12,7 +12,7 @@ class SubtaskController extends Controller
      */
     public function index()
     {
-        //
+        return view('app.subtasks.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class SubtaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.subtasks.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class SubtaskController extends Controller
      */
     public function show(Subtask $subtask)
     {
-        //
+        return view('app.subtasks.show');
     }
 
     /**
@@ -44,7 +44,7 @@ class SubtaskController extends Controller
      */
     public function edit(Subtask $subtask)
     {
-        //
+        return view('app.subtasks.edit');
     }
 
     /**
