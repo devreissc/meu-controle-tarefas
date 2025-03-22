@@ -6,6 +6,15 @@
             <form method="POST" action="{{ route('tarefas.store') }}">
                 @csrf
                 <div class="mb-3">
+                    <label for="project_id" class="form-label">Projeto</label>
+                    <select class="form-select" id="project_id" name="project_id">
+                        <option selected>Selecione um projeto</option>
+                        @foreach($projects as $project)
+                            <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="task_name" class="form-label">Tarefa</label>
                     <input type="text" class="form-control" id="task_name" name="task_name">
                     {{ $errors->has('task_name') ? $errors->first('task_name') : '' }}

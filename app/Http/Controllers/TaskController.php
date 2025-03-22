@@ -13,14 +13,16 @@ class TaskController extends Controller
     {
         // $tasks = Task::where('user_id', auth()->id())->get();
         $tasks = auth()->user()->tasks; // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
+        
 
-        return view('app.tasks.index', compact('tasks'));
+        return view('app.tasks.index', compact(['tasks']));
     }
 
 
     public function create()
     {
-        return view('app.tasks.create');
+        $projects = auth()->user()->projects;
+        return view('app.tasks.create', compact(['projects']));
     }
 
     public function store(Request $request)
