@@ -17,6 +17,7 @@
                                 <th scope="col">Previsão de conclusão</th>
                                 <th scope="col">Situação</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Qtd. tarefas</th>
                                 <th scope="col">Criação</th>
                                 <th scope="col">Atualização</th>
                                 <th scope="col" colspan="3">Ações</th>
@@ -31,6 +32,7 @@
                                     <td>{{ $project->due_date }}</td>
                                     <td>{{ $project->status }}</td>
                                     <td>{{ $project->is_complete ? 'Finalizada' : 'Pendente' }}</td>
+                                    <td>{{ $project->tasks_count }}</td>
                                     <td>{{ $project->created_at->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ $project->updated_at->format('d/m/Y H:i:s') }}</td>
                                     <td>
