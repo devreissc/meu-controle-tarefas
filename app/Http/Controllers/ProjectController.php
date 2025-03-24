@@ -11,7 +11,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = auth()->user()->projects;
+        $projects = auth()->user()->projects()->withCount('tasks')->get();
+        
         return view('app.projects.index', compact('projects'));
     }
 
@@ -58,7 +59,7 @@ class ProjectController extends Controller
 
     public function show(Project $projeto)
     {
-        return view('app.projects.show');
+        return view('app.projects.show', ['projeto' => $projeto]);
     }
 
     public function edit(Project $projeto)
