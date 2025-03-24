@@ -30,11 +30,51 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <x-dropdown-link :href="route('tarefas.index')" class="dropdown-item">
-                                {{ __('Listar') }}
+                                {{ __('Todas') }}
                             </x-dropdown-link>
                         </li>
                         <li>
                             <x-dropdown-link :href="route('tarefas.create')" class="dropdown-item">
+                                {{ __('Nova') }}
+                            </x-dropdown-link>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">
+                        {{ __('Projetos') }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <x-dropdown-link :href="route('projetos.index')" class="dropdown-item">
+                                {{ __('Todos') }}
+                            </x-dropdown-link>
+                        </li>
+                        <li>
+                            <x-dropdown-link :href="route('projetos.create')" class="dropdown-item">
+                                {{ __('Novo') }}
+                            </x-dropdown-link>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">
+                        {{ __('Subtarefas') }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <x-dropdown-link :href="route('subtarefas.index')" class="dropdown-item">
+                                {{ __('Todas') }}
+                            </x-dropdown-link>
+                        </li>
+                        <li>
+                            <x-dropdown-link :href="route('subtarefas.create')" class="dropdown-item">
                                 {{ __('Nova') }}
                             </x-dropdown-link>
                         </li>
