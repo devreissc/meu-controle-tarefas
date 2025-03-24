@@ -70,12 +70,10 @@ class ProjectController extends Controller
             return 'acesso negado';
         }
 
-        // Converte a data em um objeto Carbon
         $dueDateTime = Carbon::parse($projeto->due_date);
 
-        // Separa a data e a hora
-        $projeto->due_date = $dueDateTime->format('Y-m-d'); // Exemplo: 2025-03-22
-        $projeto->due_time = $dueDateTime->format('H:i');   // Exemplo: 13:58
+        $projeto->due_date = $dueDateTime->format('Y-m-d'); 
+        $projeto->due_time = $dueDateTime->format('H:i'); 
         
         return view('app.projects.edit', ['projeto' => $projeto]);
     }
