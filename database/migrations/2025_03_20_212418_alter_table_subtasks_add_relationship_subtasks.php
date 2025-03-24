@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('subtasks', function (Blueprint $table) {
             $table->unsignedBigInteger('task_id')->nullable()->after('id');
-            $table->foreign('task_id')->references('id')->on('projects');
+            $table->foreign('task_id')->references('id')->on('tasks');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('subtasks', function (Blueprint $table) {
-            $table->dropForeign(['project_id']);
+            $table->dropForeign(['task_id']);
             $table->dropColumn('task_id');
         });
     }
