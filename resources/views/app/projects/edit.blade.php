@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" name="is_complete" class="form-check-input" id="is_complete">
-                    <label class="form-check-label" for="is_complete">Finalizada</label>
+                    <label class="form-check-label" for="is_complete">Concluído</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
