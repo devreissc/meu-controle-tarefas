@@ -32,6 +32,7 @@ class TaskController extends Controller
             'task_description' => 'required|min:3|max:255',
             'due_date' => 'required|date',
             'due_time' => 'required',
+            'project_id' => 'required'
         ];
 
         $feedback = [
@@ -43,8 +44,8 @@ class TaskController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['task_name','task_description']);
-
+        $dados = $request->only(['task_name','task_description','project_id']);
+        
         if($request->due_date && $request->due_time){
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
         }

@@ -17,6 +17,7 @@ class Task extends Model
         'is_complete',
         'completed_at',
         'user_id',
+        'project_id'
     ];
 
     public function user()
