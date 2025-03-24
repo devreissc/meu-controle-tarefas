@@ -1,19 +1,28 @@
 <x-app-layout>
     <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
         <div class="p-4 bg-white shadow rounded" style="width: 100%; max-width: 400px;">
-            <h3 class="text-center mb-3">Nova tarefa</h3>
+            <h3 class="text-center mb-3">Nova subtarefa</h3>
 
-            <form method="POST" action="{{ route('tarefas.store') }}">
+            <form method="POST" action="{{ route('subtarefas.store') }}">
                 @csrf
                 <div class="mb-3">
-                    <label for="task_name" class="form-label">Tarefa</label>
-                    <input type="text" class="form-control" id="task_name" name="task_name">
-                    {{ $errors->has('task_name') ? $errors->first('task_name') : '' }}
+                    <label for="task_id" class="form-label">Tarefa</label>
+                    <select class="form-select" id="task_id" name="task_id">
+                        <option selected>Selecione uma tarefa</option>
+                        @foreach($tasks as $task)
+                            <option value="{{ $task->id }}">{{ $task->task_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="task_description" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="task_description" name="task_description" rows="3"></textarea>
-                    {{ $errors->has('task_description') ? $errors->first('task_description') : '' }}
+                    <label for="subtask_name" class="form-label">Subtarefa</label>
+                    <input type="text" class="form-control" id="subtask_name" name="subtask_name">
+                    {{ $errors->has('subtask_name') ? $errors->first('subtask_name') : '' }}
+                </div>
+                <div class="mb-3">
+                    <label for="subtask_description" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="subtask_description" name="subtask_description" rows="3"></textarea>
+                    {{ $errors->has('subtask_description') ? $errors->first('subtask_description') : '' }}
                 </div>
                 <div class="mb-3">
                     <label for="due_date" class="form-label">Data de conclusão</label>

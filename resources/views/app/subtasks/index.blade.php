@@ -3,7 +3,7 @@
         <div class="card shadow-sm">
             <div class="card-header bg-white">
                 <h2 class="fw-semibold text-dark">
-                    {{ __('Lista de de Tarefa') }}
+                    {{ __('Lista de de Subtarefas') }}
                 </h2>
             </div>
             <div class="card-body">
@@ -23,18 +23,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tasks as $task)
-                                <tr {{ $task->user_id == auth()->user()->id ? 'class=table-success' : 'class=table-active' }}>
-                                    <td>{{ $task->id }}</td>
-                                    <td>{{ $task->task_name }}</td>
-                                    <td>{{ $task->task_description }}</td>
-                                    <td>{{ $task->due_date }}</td>
-                                    <td>{{ $task->status }}</td>
-                                    <td>{{ $task->is_complete ? 'Finalizada' : 'Pendente' }}</td>
-                                    <td>{{ $task->created_at->format('d/m/Y H:i:s') }}</td>
-                                    <td>{{ $task->updated_at->format('d/m/Y H:i:s') }}</td>
+                            @foreach($subtarefas as $subtarefa)
+                                <tr>
+                                    <td>{{ $subtarefa->id }}</td>
+                                    <td>{{ $subtarefa->subtask_name }}</td>
+                                    <td>{{ $subtarefa->subtask_description }}</td>
+                                    <td>{{ $subtarefa->due_date }}</td>
+                                    <td>{{ $subtarefa->status }}</td>
+                                    <td>{{ $subtarefa->is_complete ? 'Finalizada' : 'Pendente' }}</td>
+                                    <td>{{ $subtarefa->created_at->format('d/m/Y H:i:s') }}</td>
+                                    <td>{{ $subtarefa->updated_at->format('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        
+                                        <a href="{{ route('subtarefas.edit', ['subtarefa' => $subtarefa->id]) }}" class="btn btn-secondary">Editar</a>
+                                        <a href="{{ route('subtarefas.show', ['subtarefa' => $subtarefa->id]) }}" class="btn btn-info">Visualizar</a>
+                                        <form id="form_{{ $subtarefa->id }}" method="POST" action="{{ route('subtarefas.destroy', ['subtarefa' => $subtarefa->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#" onclick="document.getElementById('form_{{ $subtarefa->id }}').submit()" class="btn btn-danger">Excluir</a>
+                                        </form>
                                     </td>
                             @endforeach
                         </tbody>
