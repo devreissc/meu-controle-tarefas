@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = auth()->user()->projects()->withCount('tasks')->get();
+        $projects = auth()->user()->projects()->with('user')->withCount('tasks')->get();
         
         return view('app.projects.index', compact('projects'));
     }
@@ -95,14 +95,26 @@ class ProjectController extends Controller
             'time' => 'O campo :attribute está preenchido incorretamente',
         ];
 
+        $dados = $request->only(['project_name','project_description']);
+
         $request->validate($rules, $feedback);
+
+        if ($request->has('is_complete')) {
+            $dados['is_complete'] = true;
+        }else{
+            $dados['is_complete'] = false;
+        }
+
+        if ($request->filled('due_date') && $request->filled('due_time')) {
+            $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
+        }
 
         $user_id = Auth::user()->id;
         if($projeto->user_id != $user_id){
             return 'acesso-negado';
         }
 
-        $projeto->update($request->all());
+        $projeto->update($dados);
 
         return redirect()->route('projetos.show', ['projeto' => $projeto->id]);
     }
