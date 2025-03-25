@@ -34,7 +34,13 @@
                                     <td>{{ $task->created_at->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ $task->updated_at->format('d/m/Y H:i:s') }}</td>
                                     <td>
-                                        
+                                        <a href="{{ route('tarefas.edit', ['tarefa' => $task->id]) }}" class="btn btn-secondary">Editar</a>
+                                        <a href="{{ route('tarefas.show', ['tarefa' => $task->id]) }}" class="btn btn-info">Visualizar</a>
+                                        <form id="form_{{ $task->id }}" method="POST" action="{{ route('tarefas.destroy', ['tarefa' => $task->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#" onclick="document.getElementById('form_{{ $task->id }}').submit()" class="btn btn-danger">Excluir</a>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
