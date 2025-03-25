@@ -13,7 +13,8 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::where('user_id', auth()->id())->get();
-        $tasks = auth()->user()->tasks; // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
+        $tasks = auth()->user()->tasks()->with('user')->withCount('subtasks')->get(); // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
+        
         return view('app.tasks.index', compact(['tasks']));
     }
 
@@ -105,6 +106,8 @@ class TaskController extends Controller
 
         if($request->is_complete){
             $dados['is_complete'] = true;
+        }else{
+            $dados['is_complete'] = false;
         }
 
         $dados['user_id'] = Auth::id();
