@@ -102,6 +102,8 @@ class SubtaskController extends Controller
 
         if($request->is_complete){
             $dados['is_complete'] = true;
+        }else{
+            $dados['is_complete'] = false;
         }
         
         $subtarefa->update($dados);
