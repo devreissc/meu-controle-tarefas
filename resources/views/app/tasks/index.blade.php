@@ -17,6 +17,8 @@
                                 <th scope="col">Previsão de conclusão</th>
                                 <th scope="col">Situação</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Qtd. subtarefas</th>
+                                <th scope="col">Atribuído a</th>
                                 <th scope="col">Criação</th>
                                 <th scope="col">Atualização</th>
                                 <th scope="col">Ações</th>
@@ -31,6 +33,9 @@
                                     <td>{{ $task->due_date }}</td>
                                     <td>{{ $task->status }}</td>
                                     <td>{{ $task->is_complete ? 'Finalizada' : 'Pendente' }}</td>
+                                    <td>{{ $task->subtasks_count }}</td>
+                                    <td>{{ $task->user->name ?? 'N/A' }}</td>
+                                    
                                     <td>{{ $task->created_at->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ $task->updated_at->format('d/m/Y H:i:s') }}</td>
                                     <td>
