@@ -36,7 +36,7 @@
                     {{ $errors->has('due_time') ? $errors->first('due_time') : '' }}
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" name="is_complete" class="form-check-input" id="is_complete">
+                    <input type="checkbox" name="is_complete" class="form-check-input" id="is_complete" {{ ($tarefa->is_complete ?? old('is_complete')) ? 'checked' : '' }}>
                     <label class="form-check-label" for="is_complete">Concluído</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
