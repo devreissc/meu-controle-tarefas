@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subtask;
+use App\Models\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -17,8 +19,10 @@ class SubtaskController extends Controller
     
     public function create()
     {
-        $tasks = auth()->user()->tasks;
-        return view('app.subtasks.create', compact(['tasks']));
+        $users = User::all();
+        $tasks = auth()->user()->tasks()->get();
+
+        return view('app.subtasks.create', compact(['tasks', 'users']));
     }
 
     public function store(Request $request)
@@ -41,7 +45,7 @@ class SubtaskController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['subtask_name','subtask_description','task_id']);
+        $dados = $request->only(['subtask_name','subtask_description','task_id','user_id']);
         
         if($request->due_date && $request->due_time){
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
@@ -65,13 +69,14 @@ class SubtaskController extends Controller
 
     public function edit(Subtask $subtarefa)
     {
-        $tasks = auth()->user()->tasks;
-
+        $tasks = auth()->user()->tasks()->get();
+        
+        $users = User::all();
         $dueDateTime = Carbon::parse($subtarefa->due_date);
         $subtarefa->due_date = $dueDateTime->format('Y-m-d');
         $subtarefa->due_time = $dueDateTime->format('H:i');
 
-        return view('app.subtasks.edit', compact(['tasks','subtarefa']));
+        return view('app.subtasks.edit', compact(['users','subtarefa','tasks' ]));
     }
 
     public function update(Request $request, Subtask $subtarefa)
@@ -94,7 +99,7 @@ class SubtaskController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['subtask_name','subtask_description','task_id']);
+        $dados = $request->only(['subtask_name','subtask_description','task_id','user_id']);
         
         if($request->due_date && $request->due_time){
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
