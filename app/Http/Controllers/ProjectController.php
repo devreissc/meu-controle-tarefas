@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -18,7 +19,8 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('app.projects.create');
+        $users = User::all();
+        return view('app.projects.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -39,7 +41,7 @@ class ProjectController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['project_name','project_description']);
+        $dados = $request->only(['project_name','project_description','user_id']);
         $dados['user_id'] = Auth::id();
 
         if ($request->filled('due_date') && $request->filled('due_time')) {
@@ -65,17 +67,14 @@ class ProjectController extends Controller
     public function edit(Project $projeto)
     {
         $user_id = Auth::id();
-
-        if($projeto->user_id != $user_id){
-            return 'acesso negado';
-        }
+        $users = User::all();
 
         $dueDateTime = Carbon::parse($projeto->due_date);
 
         $projeto->due_date = $dueDateTime->format('Y-m-d'); 
         $projeto->due_time = $dueDateTime->format('H:i'); 
         
-        return view('app.projects.edit', ['projeto' => $projeto]);
+        return view('app.projects.edit', ['projeto' => $projeto, 'users' => $users]);
     }
 
 
@@ -95,7 +94,7 @@ class ProjectController extends Controller
             'time' => 'O campo :attribute está preenchido incorretamente',
         ];
 
-        $dados = $request->only(['project_name','project_description']);
+        $dados = $request->only(['project_name','project_description','user_id']);
 
         $request->validate($rules, $feedback);
 
@@ -109,11 +108,6 @@ class ProjectController extends Controller
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
         }
 
-        $user_id = Auth::user()->id;
-        if($projeto->user_id != $user_id){
-            return 'acesso-negado';
-        }
-
         $projeto->update($dados);
 
         return redirect()->route('projetos.show', ['projeto' => $projeto->id]);
@@ -123,9 +117,6 @@ class ProjectController extends Controller
     {
         $user_id = Auth::id();
         
-        if($projeto->user_id != $user_id){
-            return 'acesso negado';
-        }
 
         $projeto->delete();
 
