@@ -8,7 +8,7 @@
     <div class="mb-3">
         <label for="project_id" class="form-label">Projeto</label>
         <select class="form-select" id="project_id" name="project_id">
-            <option selected>Selecione um projeto</option>
+            <option value="" selected>Selecione um projeto</option>
             @foreach($projects as $project)
                 <option value="{{ $project->id }}" {{ old('project_id', $tarefa?->project_id ) == $project->id ? 'selected' : '' }}>{{ $project->project_name }}</option>
             @endforeach
@@ -17,7 +17,7 @@
     <div class="mb-3">
         <label for="user_id" class="form-label">Responsável</label>
         <select class="form-select" id="user_id" name="user_id">
-            <option selected>Selecione um responsável</option>
+            <option value="" selected>Selecione um responsável</option>
             @foreach($users as $user)
                 <option value="{{ $user->id }}" {{ old('user_id', $tarefa?->user_id ) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
             @endforeach
