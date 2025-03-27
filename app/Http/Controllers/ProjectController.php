@@ -12,7 +12,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = auth()->user()->projects()->with('user')->withCount('tasks')->get();
+        $projects = Project::with('user')->withCount('tasks')->get();
         
         return view('app.projects.index', compact('projects'));
     }

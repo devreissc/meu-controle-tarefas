@@ -12,7 +12,7 @@ class SubtaskController extends Controller
 {
     public function index()
     {
-        $subtarefas = Subtask::all();
+        $subtarefas = Subtask::with('user')->get();
         return view('app.subtasks.index', compact(['subtarefas']));
     }
 

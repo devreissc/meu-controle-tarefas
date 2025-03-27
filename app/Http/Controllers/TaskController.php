@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::where('user_id', auth()->id())->get();
-        $tasks = auth()->user()->tasks()->with('user')->withCount('subtasks')->get(); // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
+        $tasks = Task::with('user')->withCount('subtasks')->get(); // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
         
         return view('app.tasks.index', compact(['tasks']));
     }
@@ -48,7 +48,7 @@ class TaskController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['task_name','task_description','project_id']);
+        $dados = $request->only(['task_name','task_description','project_id','user_id']);
         
         if($request->due_date && $request->due_time){
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
@@ -58,8 +58,6 @@ class TaskController extends Controller
             $dados['is_complete'] = true;
         }
 
-        $dados['user_id'] = Auth::id();
-        // dd($dados);
         if(Task::create($dados)){
             return redirect()->route('tarefas.index');
         }else{
@@ -104,7 +102,7 @@ class TaskController extends Controller
 
         $request->validate($rules, $feedback);
 
-        $dados = $request->only(['task_name','task_description','project_id']);
+        $dados = $request->only(['task_name','task_description','project_id','user_id']);
         
         if($request->due_date && $request->due_time){
             $dados['due_date'] = $request->due_date . ' ' . $request->due_time;
@@ -115,9 +113,7 @@ class TaskController extends Controller
         }else{
             $dados['is_complete'] = false;
         }
-
-        $dados['user_id'] = Auth::id();
-
+        // dd($dados);
         $tarefa->update($dados);
 
         return redirect()->route('tarefas.show', ['tarefa' => $tarefa->id]);
