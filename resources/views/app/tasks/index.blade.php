@@ -51,6 +51,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $tasks->appends($request)->links() }}
+                    <br>Exibindo {{ $tasks->count() }} tarefas de {{ $tasks->total() }} (de {{ $tasks->firstItem() }} a {{ $tasks->lastItem() }})
                 </div>
             </div>
         </div>

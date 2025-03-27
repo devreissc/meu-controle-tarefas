@@ -12,12 +12,12 @@ use Carbon\Carbon;
 class TaskController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         // $tasks = Task::where('user_id', auth()->id())->get();
-        $tasks = Task::with('user')->withCount('subtasks')->get(); // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
-        
-        return view('app.tasks.index', compact(['tasks']));
+        $tasks = Task::with('user')->withCount('subtasks')->paginate(5); // Busca todas as tarefas do usuário autenticado, usando o relacionamento definido no modelo User
+        $request = $request->all();
+        return view('app.tasks.index', compact(['tasks','request']));
     }
 
 
