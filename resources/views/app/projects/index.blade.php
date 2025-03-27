@@ -49,6 +49,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $projects->appends($request)->links() }}
+                    <br>Exibindo {{ $projects->count() }} projetos de {{ $projects->total() }} (de {{ $projects->firstItem() }} a {{ $projects->lastItem() }})
                 </div>
             </div>
         </div>

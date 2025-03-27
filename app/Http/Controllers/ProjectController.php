@@ -10,11 +10,11 @@ use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with('user')->withCount('tasks')->get();
-        
-        return view('app.projects.index', compact('projects'));
+        $projects = Project::with('user')->withCount('tasks')->paginate(5);
+        $request = $request->all();
+        return view('app.projects.index', compact('projects','request'));
     }
 
     public function create()
