@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -21,8 +23,10 @@ class TaskController extends Controller
 
     public function create()
     {
-        $projects = auth()->user()->projects;
-        return view('app.tasks.create', compact(['projects']));
+        $users = User::all();
+        $projects = Project::all();
+
+        return view('app.tasks.create', compact(['projects', 'users']));
     }
 
     public function store(Request $request)
@@ -70,13 +74,15 @@ class TaskController extends Controller
 
     public function edit(Task $tarefa)
     {
-        $projects = auth()->user()->projects;
-
+        $projects = Project::all();
+        
+        $users = User::all();
+        
         $dueDateTime = Carbon::parse($tarefa->due_date);
         $tarefa->due_date = $dueDateTime->format('Y-m-d');
         $tarefa->due_time = $dueDateTime->format('H:i');
 
-        return view('app.tasks.edit', compact(['projects','tarefa']));
+        return view('app.tasks.edit', compact(['projects','tarefa','users']));
     }
 
     public function update(Request $request, Task $tarefa)
