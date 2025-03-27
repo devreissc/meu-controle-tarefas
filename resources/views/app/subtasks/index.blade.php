@@ -45,6 +45,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $subtarefas->appends($request)->links() }}
+                    <br>Exibindo {{ $subtarefas->count() }} subtarefas de {{ $subtarefas->total() }} (de {{ $subtarefas->firstItem() }} a {{ $subtarefas->lastItem() }})
                 </div>
             </div>
         </div>

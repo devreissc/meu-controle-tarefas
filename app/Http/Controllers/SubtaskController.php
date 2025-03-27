@@ -10,10 +10,11 @@ use Carbon\Carbon;
 
 class SubtaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subtarefas = Subtask::with('user')->get();
-        return view('app.subtasks.index', compact(['subtarefas']));
+        $subtarefas = Subtask::with(['user','task'])->paginate(5);
+        $request = $request->all();
+        return view('app.subtasks.index', compact(['subtarefas','request']));
     }
 
     
